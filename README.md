@@ -63,7 +63,7 @@ afterwards, access the image view with
 rqt_image_view
 ```
 You can now choose between different visualisations, from compressed original image to edge detection and birds-eye-view (ground_projection_image)
-- [ ] Check if you could see different camera streams of the DB
+- [ ] Check if you could see different camera streams of the DB and know what they are used for
 
 ### Lane Following
 **Preliminary**: Place it on the ground.
@@ -166,8 +166,19 @@ First steps are done! :)
 Checkpoint 0 - Cloning, Branching, Editing
 
 <Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 ```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 
 ## Catkin Packages
 ROS utilizes the catkin build system to manage and construct its software within catkin workspaces, which are directories housing multiple software modules known as catkin packages. These packages can contain ROS nodes, which are sets of executables (such as binaries and script files). ROS nodes communicate through common patterns: publish-subscribe and request-reply, facilitated by ROS Publishers, ROS Subscribers, and ROS Services.
@@ -226,8 +237,19 @@ We now have a catkin package inside of a catkin workspace.
 Checkpoint i - Init Catkin Workspace
 
 <Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 ```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 
 ## ROS Publisher
 The predominant communication pattern in robotics is the publish-subscribe pattern. In ROS, this pattern is implemented through ROS Publishers and ROS Subscribers. This section focuses on creating a ROS Publisher.
@@ -254,14 +276,13 @@ from duckietown.dtros import DTROS, NodeType
 
 
 class MyPublisherNode(DTROS):
-
     def __init__(self, node_name):
         # initialize the DTROS parent class
         super(MyPublisherNode, self).__init__(node_name=node_name, node_type=NodeType.GENERIC)
         # static parameters
         self._vehicle_name = os.environ['VEHICLE_NAME']
         # construct publisher
-        self._publisher = rospy.Publisher('chatter', String, queue_size=10)
+		#### 1 ####
 
     def run(self):
         # publish message every 1 second (1 Hz)
@@ -269,7 +290,7 @@ class MyPublisherNode(DTROS):
         message = f"Hello from {self._vehicle_name}!"
         while not rospy.is_shutdown():
             rospy.loginfo("Publishing message: '%s'" % message)
-            self._publisher.publish(message)
+			#### 2 ####
             rate.sleep()
 
 if __name__ == '__main__':
@@ -280,7 +301,8 @@ if __name__ == '__main__':
     # keep the process from terminating
     rospy.spin()
 ```
-
+- [ ] Placeholder 1 in line 16: Define a `rospy.Publisher`  which publishes `"chatter"` as a string with a queue-size of 10.
+- [ ] Placeholder 2 in line 24: Publish the `message` defined in line 21 via a publish method on your `rospy.Publisher`.
 - [ ] And change the file permissions of `my_publisher_node.py` to be executable, by either running 
 ``` Terminal
 chmod +x ./packages/my_package/src/my_publisher_node.py
@@ -337,8 +359,19 @@ Summary: We now created
 Checkpoint ii - ROS Publisher
 
 <Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 ```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 ## ROS Subscriber
 In the field of robotics, the most prevalent communication pattern is the publish-subscribe pattern. ROS (Robot Operating System) utilizes this pattern through ROS Publishers and ROS Subscribers. In this section, we'll explore how to create a ROS Subscriber.
 
@@ -360,7 +393,7 @@ class MySubscriberNode(DTROS):
         # initialize the DTROS parent class
         super(MySubscriberNode, self).__init__(node_name=node_name, node_type=NodeType.GENERIC)
         # construct subscriber
-        self.sub = rospy.Subscriber('chatter', String, self.callback)
+		#### 1 ####
 
     def callback(self, data):
         rospy.loginfo("I heard '%s'", data.data)
@@ -371,6 +404,7 @@ if __name__ == '__main__':
     # keep spinning
     rospy.spin()
 ```
+- [ ] Placeholder 1 line 13: define a `rospy.Subscriber` as `self.sub` which subscribes to `"chatter"`, String, `self.callback` 
 - [ ] Change the file permissions to executable.
 ### Create and Define a Launcher
 - [ ] Create a Launcher file named `my-subscriber.sh` in the `./launchers` directory
@@ -406,7 +440,8 @@ Think about what was done in this subchapter and try to understand the console o
 What could be the reason for aborting?
 
 ### Checkpoint iii
-- [ ] Go back to the first terminal start a publisher, then go back to the second terminal and start a subscriber. The terminals should now show something in the regards of `Publishing message: "Hello from [botname]"` for publisher, and `I heard "Hello from [botname]"` for the subscriber.
+- [ ] Find a solution to the error message and what's missing
+
 Summary: We now created 
 - a publisher node `my-publisher-node.py`, 
 - a launch file for the publisher node `my-publisher.sh`, 
@@ -420,9 +455,19 @@ Summary: We now created
 Checkpoint iii - ROS Subscriber
 
 <Describing text>
-```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+```
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 ## ROS Subscriber for Camera Stream
 We will now set a subscriber for the published camera stream of the DB. Normally, we would have to create a new Catkin package. But in this case, we already created that by defining `packages/my_package`, the catkin workspace files `package.xml` and `CMakeLists.txt`. We will use this basic workspace for the follwing steps. 
 
@@ -446,20 +491,20 @@ class CameraReaderNode(DTROS):
         super(CameraReaderNode, self).__init__(node_name=node_name, node_type=NodeType.VISUALIZATION)
         # static parameters
         self._vehicle_name = os.environ['VEHICLE_NAME']
-        self._camera_topic = f"/{<...>}/camera_node/image/compressed"
+		#### 1 ####
         # bridge between OpenCV and ROS
         self._bridge = CvBridge()
         # create window
         self._window = "camera-reader"
         cv2.namedWindow(self._window, cv2.WINDOW_AUTOSIZE)
         # construct subscriber
-        self.sub = rospy.Subscriber(<...>, <...>, <...>)
+		#### 2 ####
 
 	def callback(self, msg):
         # convert JPEG bytes to CV image
-        image = <...>
+		#### 3 ####
         # display frame
-        cv2.imshow(<...>, <...>)
+		#### 4 ####
         cv2.waitKey(1)
 
 if __name__ == '__main__':
@@ -469,10 +514,10 @@ if __name__ == '__main__':
     rospy.spin()
 ```
 The file holds a few placeholders. Fill the blank spaces `<...>` in the file in...
-- [ ] line 18
-- [ ] line 25
-- [ ] line 29
-- [ ] line 31
+- [ ] Placeholder 1 line 18: Define `self._camera_topic` as a raw string of the compressed image node of your regarding vehicle
+- [ ] Placeholder 2 line 25: Define `self.sub`, a `rospy.Subscriber` which is subscribed to the previously define `self._camera_topic` via the self.callback function and subscribing to `CompressedImage`.
+- [ ] Placeholder 3, line 29: Define `image`, which converts a CompressedImage message recieived via ROS into a OpenCV image format, subsequently allowing further image processing and analysis
+- [ ] Placeholder 4, line 31: Show the image via cv2 
 - [ ] Also, make the file executable
 
 ### Create and Define Camera Launcher
@@ -508,8 +553,19 @@ A window with the camera stream of the DB should pop up on your pc.
 Checkpoint iv - ROS Camera Subscriber
 
 <Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 ```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 
 - [ ] Check your directory with the command `tree` in the console to view the contents of your directory and check if all the previously created files exit 
 	- [ ] two files for the catkind workspace
@@ -520,40 +576,47 @@ Please provide detailed information in `<Describing text>` to demonstrate your u
 Finally, we will enhance the functionality of the most recently created camera subscriber node. Instead of displaying just one image from the compressed camera stream, we will extend it to process the camera stream. This modification involves editing the callback method in the previously created file. Additionally, we will introduce a grayscale image as an intermediate step and include an edge detection image named "Canny" in the process.
 - [ ] Apply the code necessary to the placeholders below
 ``` python
-### Old callback method
-	def callback(self, msg):
-        # convert JPEG bytes to CV image
-        image = <...>
-        # display frame
-        cv2.imshow(<...>, <...>)
-        cv2.waitKey(1)
-
 ### New callback method
 	def callback(self, msg):
         # convert JPEG bytes to CV image
-        image = <...>
+		#### 1 ####
         # convert the image to a gray-scale image
-        gray = <...>
+		#### 2 ####
         # convert the gray-scale image into a Canny (edge detector)
-        edges = <...>
+		#### 3 ####
         # Use the cv2.imshow method to create a window of the three different images
-        cv2.imshow(<...>, <...>)
-		cv2.imshow(<...>, <...>)
-		cv2.imshow(<...>, <...>)
+		#### 4 ####
+		#### 5 ####
+		#### 6 ####
         cv2.waitKey(1)
 ```
-
+- [ ] Placeholder 1, line 4: Define `image`, which converts a CompressedImage message recieived via ROS into a OpenCV image format, subsequently allowing further image processing and analysis
+- [ ] Placeholder 2, line 6: Define `gray`, converting OpenCV image format into grayscale, subsequently allowing further image processing and analysis
+- [ ] Placeholder 3, line 8: Define `gray`, converting OpenCV image format into grayscale, subsequently allowing further image processing and analysis
+- [ ] Placeholder 4, 5, 6: Show the different views as an output
 ### Checkpoint v
+
 - [ ] Commit the changes onto **your branch**. Use the following commit message. Describe what you did in `<Describing text>`.
 ``` Terminal
 Checkpoint v - Edge Detection
 
 <Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
+<Describing text>
 ```
-Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter. Ensure that your description doesn't exceed **5 lines, with each line having less than 72 characters**.
+Please provide detailed information in `<Describing text>` to demonstrate your understanding of the chapter, answer the questions, describe what you did for the checkpoints. Ensure that your description doesn't exceed  **2 blocks 5 lines, with each line having less than 72 characters**. 
+**Important**: Each of you should understand what you have done in the previous chapter. Use the checkpoints to document a common understanding in your Group. 
 
 This is it! you are done! you have now created your first ros workspace, accessed the camera, created an edge detector. Congratulations! 
-- [ ] Here is another checkbox for satisfactory reasons
+- [ ] Here is another checkbox for satisfactory reasons ;)
 
 # Final Words
 After everything is up and running, you can inspect and compare the outcomes of your edge detector with those generated by the DB's original edge detector, as detailed in the "Access Camera ROS Stream" section.
