@@ -58,7 +58,8 @@ RUN dt-apt-install ${REPO_PATH}/dependencies-apt.txt
 ARG PIP_INDEX_URL="https://pypi.org/simple"
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 COPY ./dependencies-py3.* "${REPO_PATH}/"
-RUN dt-pip3-install "${REPO_PATH}/dependencies-py3.*"
+RUN pip3 install -r "${REPO_PATH}/dependencies-py3.txt"
+RUN pip3 install -r "${REPO_PATH}/dependencies-py3.dt.txt"
 
 # copy the source code
 COPY ./packages "${REPO_PATH}/packages"
